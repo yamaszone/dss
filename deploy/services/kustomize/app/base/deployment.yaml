@@ -14,9 +14,9 @@ spec:
         service: dss
     spec:
       containers:
-        - image: interuss/dss:latest
+        - name: dss
+          image: interuss/dss:latest
           imagePullPolicy: IfNotPresent
-          name: dss
           command: [ "core-service",
                      "-addr", ":8082",
                      "-public_key_files", "test-certs/auth2.pem",
@@ -38,9 +38,9 @@ spec:
               memory: 256Mi
 
       initContainers:
-        - image: interuss/dss:latest
+        - name: bootstraping-rid
+          image: interuss/dss:latest
           imagePullPolicy: IfNotPresent
-          name: bootstraping-rid
           command: [ "/usr/bin/db-manager" ]
           args: [ "--schemas_dir", "db-schemas/rid",
                   "--db_version", "latest",
@@ -53,9 +53,9 @@ spec:
             limits:
               cpu: 100m
               memory: 128Mi
-        - image: interuss/dss:latest
+        - name: bootstraping-scd
+          image: interuss/dss:latest
           imagePullPolicy: IfNotPresent
-          name: bootstraping-scd
           command: [ "/usr/bin/db-manager" ]
           args: [ "--schemas_dir", "db-schemas/rid",
                   "--db_version", "latest",
