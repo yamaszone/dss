@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cockroach
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: cockroach
+  template:
+    metadata:
+      labels:
+        service: cockroach
+    spec:
+      containers:
+        - name: cockroach
+          image: cockroachdb/cockroach:v21.2.7
+          imagePullPolicy: IfNotPresent
+          args: ["start-single-node", "--insecure"]
+          ports:
+            - containerPort: 8080
+            - containerPort: 26257

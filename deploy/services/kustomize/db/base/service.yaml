@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cockroach
+spec:
+  ports:
+    - name: cockroach-ui
+      port: 8080
+      targetPort: 8080
+    - name: cockroach
+      port: 26257
+      targetPort: 26257
+  selector:
+    service: cockroach
+  type: ClusterIP
